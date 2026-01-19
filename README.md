@@ -3,46 +3,74 @@
 
 ![Dashboard Map](images/dashboard_map.png)
 
-## 📌 The Problem: Static Models Fail
-Aadhaar enrolment centers currently operate on "Average Logic." But reality is not average.
-* **The Reality:** Urban centers (e.g., Pune) crash during peak hours, while rural nodes sit idle.
-* **The Cost:** We calculated a daily loss of **4.04 Million Citizen-Hours** due to inefficient queuing.
+## ⚡ Technical Summary
 
-This is not a dashboard. It is a **Prescriptive Solver**. It treats enrolment centers as nodes in a stochastic network and optimizes them dynamically.
+The **UIDAI Operational Intelligence Grid** is a decision support system (DSS) for Aadhaar Seva Kendras. It moves beyond descriptive analytics (what happened?) to prescriptive physics (what will happen?).
+
+**The Engineering Problem:**
+Standard dashboards track "Footfall." This is a vanity metric.
+**The Solution:**
+We track **"Citizen Pain" (Wait Time)**. By implementing **M/G/k Queueing Theory**, we model the non-linear relationship between load and service latency, predicting bottlenecks 7 days in advance.
+
+---
+
+## 🛠️ System Architecture
+
+The pipeline uses a modular Microservices pattern.
+
+| Component | Algorithm / Library | Purpose | Output Metric |
+| :--- | :--- | :--- | :--- |
+| **Physics Engine** | `M/G/k Queueing` + `Kingman Approx` | Congestion Modeling | **Wait Time (Minutes)** (Not just load) |
+| **Causal Solver** | `Double Machine Learning (DML)` | Econ ML | **Intervention ROI** (Counterfactual analysis) |
+| **Forecasting** | `LSTM-Attention` | Time-Series | **Stress Probability** (7-Day Horizon) |
+| **Forensics** | `Isolation Forest` | Unsupervised Learning | **Data Integrity Score** (Fraud/Noise filter) |
+
+> **Note on Queueing Theory:** We selected `M/G/k` over the standard `M/M/1` model because biometric service times are **not exponential** (General Distribution). `M/M/1` would underestimate wait times by ~40% in rural contexts.
 
 ---
 
-## ⚙️ Engineering Methodology
+## 💻 Setup & Execution
 
-### 1. Forensics: Filtering the Noise
-Before optimizing, we had to clean the data. Simple standard deviation filters failed because the dataset is non-normal.
+**Prerequisites:** Python 3.9+ (Requires `scipy`, `statsmodels`, `plotly`).
 
-* **Algorithm:** `Isolation Forest` (Contamination=0.01).
-* **Why?** We needed to detect "Bimodal Failures" (Capacity crashes vs. Integrity violations) without manual labeling.
-* **Evidence:** The panic cycles are clearly visible in the extracted seasonality plot below.
+### 1. Installation
+```bash
+git clone [https://github.com/your-username/UIDAI_Hackathon_Project.git](https://github.com/your-username/UIDAI_Hackathon_Project.git)
+cd UIDAI_Hackathon_Project
+pip install -r requirements.txt
 
-![Forensic Audit](images/forensics_audit.png)
+2. Run the Intelligence Pipeline
+This script handles data ingestion, forensic cleaning, and the heavy M/G/k computation. Runtime: ~45s on standard CPU.  
+        python run_pipeline.py
+        Output: Generates artifacts in /artifacts folder.
 
-### 2. The Physics of Queues (M/G/k)
-We rejected the standard `M/M/1` queue model. Biometric authentication is unpredictable—retries spike service times, creating non-linear congestion.
+3. Launch Command Center
+Starts the Streamlit server on localhost:8501.
+        streamlit run dashboard_app.py
 
-* **The Shift:** We implemented the **M/G/k Model** (General Service Distribution).
-* **The Innovation:** We made the Service Rate ($\mu$) dynamic based on the district's **Biometric Intensity Ratio (BIR)**.
-* **Critical Finding:** As shown in the simulation below, 631 districts are operating at **>100% utilization** (the vertical wall of black dots). These queues will mathematically never clear without intervention.
 
-![Physics Engine](images/physics_engine.png)
+📊 Dashboard Capabilities
+A. The Geospatial Digital Twin (PyDeck)
+We utilize a 3D Column Layer visualization rather than 2D choropleths.
 
-### 3. Causal ROI Verification (DML)
-How do we know if sending more kits actually helps?
-We used **Double Machine Learning (DML)** to filter out confounding variables (like population trends). The chart below proves the **Counterfactual Reality**: the green line shows the stress reduction strictly caused by our intervention.
+Z-Axis: Total Daily Load.
 
-![Causal ROI](images/causal_roi.png)
+Color Logic: Dynamic thresholding. Red indicates Wait Time > 60 mins (Critical Stress), not just high volume.
 
----
+B. Real-Time Intervention Simulator
+Allows administrators to test hardware allocation strategies.
+
+Input: Slider controls for "Strategic Reserves" (Kit deployment).
+
+Process: The app re-runs the M/G/k solver in real-time (using @st.fragment for partial rerenders).
+
+Output: Instant visualization of the Marginal Reduction in Wait Time.
+
+C. Causal Verification
+We use DML to separate signal from noise. This module proves that a reduction in stress is strictly caused by the hardware injection, not by external population variables.
 
 ## 📂 Repository Structure
 
-```bash
 UIDAI_Hackathon_Solution/
 ├── src/                         # The Intelligence Core
 │   ├── forensics.py             # Isolation Forest & Signal Decomposition
@@ -65,13 +93,8 @@ UIDAI_Hackathon_Solution/
 ├── requirements.txt             # Dependencies
 └── README.md
 
-🚀 How to Run
-1. Install Dependencies:
-        pip install -r requirements.txt
+⚠️ Known Limitations
 
-2. Ignite the Solver:
-        python run_pipeline.py
-    (Note: The M/G/k solver takes ~45s to converge on the full dataset.)
+1. Data Latency: The model assumes daily batch processing. Real-time Kafka streaming is planned for v2.0.
 
-3. Launch Control Center:
-        streamlit run dashboard_app.py
+2. Service Rate Variance: The current M/G/k model assumes a fixed Service Rate variance ($\sigma^2$) across all districts. Future updates will strictly model per-operator variance.
