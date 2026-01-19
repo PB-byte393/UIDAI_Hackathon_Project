@@ -1,7 +1,10 @@
 # 🇮🇳 UIDAI Operational Intelligence Grid
-### Spatio-Temporal Optimization of Enrolment Infrastructure
 
-![Dashboard Map](images/dashboard_map.png)
+[![Build Status](https://img.shields.io/badge/Build-Passing-success?style=flat-square)](https://uidai.gov.in)
+[![Stack](https://img.shields.io/badge/Tech-Python%20|%20Streamlit%20|%20PyDeck-blue?style=flat-square)](https://python.org)
+[![Math](https://img.shields.io/badge/Theory-M%2FG%2Fk%20Queueing-orange?style=flat-square)](https://en.wikipedia.org/wiki/M/G/k_queue)
+
+> **Core Logic:** Static resource allocation fails because citizen arrival is stochastic. This system replaces average-based planning with causal pre-emption.
 
 ## ⚡ Technical Summary
 
@@ -11,8 +14,6 @@ The **UIDAI Operational Intelligence Grid** is a decision support system (DSS) f
 Standard dashboards track "Footfall." This is a vanity metric.
 **The Solution:**
 We track **"Citizen Pain" (Wait Time)**. By implementing **M/G/k Queueing Theory**, we model the non-linear relationship between load and service latency, predicting bottlenecks 7 days in advance.
-
----
 
 ## 🛠️ System Architecture
 
