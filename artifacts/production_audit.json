@@ -1,0 +1,24 @@
+{
+    "run_id": "20260119_040840",
+    "status": "SUCCESS",
+    "steps": {
+        "validation": "SUCCESS",
+        "Optimization Engine (M/G/k)": {
+            "status": "SUCCESS",
+            "duration": 5.142799615859985
+        },
+        "Deep Temporal Forecasting": {
+            "status": "SUCCESS",
+            "duration": 26.068889379501343
+        },
+        "Spatial Graph Learning (GNN)": {
+            "status": "SUCCESS",
+            "duration": 13.731447458267212
+        },
+        "Double Machine Learning (DML)": {
+            "status": "SUCCESS",
+            "duration": 180.54994440078735
+        }
+    },
+    "performance_metrics": {}
+}

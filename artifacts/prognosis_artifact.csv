@@ -1,0 +1,38 @@
+Day,Load,Type,District
+-30,2819.0,Historical,Pune
+-29,6251.0,Historical,Pune
+-28,8539.0,Historical,Pune
+-27,10361.0,Historical,Pune
+-26,9276.0,Historical,Pune
+-25,6978.000000000001,Historical,Pune
+-24,7876.0,Historical,Pune
+-23,3240.0,Historical,Pune
+-22,8388.0,Historical,Pune
+-21,7533.0,Historical,Pune
+-20,8639.0,Historical,Pune
+-19,10155.0,Historical,Pune
+-18,10768.0,Historical,Pune
+-17,7342.999999999999,Historical,Pune
+-16,2917.0,Historical,Pune
+-15,6441.0,Historical,Pune
+-14,9260.0,Historical,Pune
+-13,1754.0,Historical,Pune
+-12,9588.0,Historical,Pune
+-11,3800.0,Historical,Pune
+-10,2175.0,Historical,Pune
+-9,3367.0,Historical,Pune
+-8,6161.0,Historical,Pune
+-7,1945.0,Historical,Pune
+-6,8419.0,Historical,Pune
+-5,10214.0,Historical,Pune
+-4,10115.0,Historical,Pune
+-3,3743.0,Historical,Pune
+-2,5696.0,Historical,Pune
+-1,739.0,Historical,Pune
+1,6003.70947265625,AI Forecast,Pune
+2,5731.58056640625,AI Forecast,Pune
+3,5990.58740234375,AI Forecast,Pune
+4,6276.25244140625,AI Forecast,Pune
+5,6230.87841796875,AI Forecast,Pune
+6,6407.91943359375,AI Forecast,Pune
+7,7208.42919921875,AI Forecast,Pune
